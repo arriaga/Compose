@@ -8,7 +8,7 @@ services:
       - "443:443"
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - /Users/luisarriaga/Documents/Rodisa/rodisa-dashboard/dist/certs:/etc/nginx/certs:ro
+      - /home/ec2-user/certs:/etc/nginx/certs:ro
       - vhostd:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
     labels:
@@ -21,7 +21,7 @@ services:
     environment:
       - NGINX_PROXY_CONTAINER=nginx-proxy
     volumes:
-      - /Users/luisarriaga/Documents/Rodisa/rodisa-dashboard/dist/certs:/etc/nginx/certs:rw
+      - /home/ec2-user/certs:/etc/nginx/certs:rw
       - vhostd:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
@@ -34,8 +34,8 @@ services:
     expose:
       - "80"
     environment:
-      - VIRTUAL_HOST=smartpack-rodisa.com
-      - LETSENCRYPT_HOST=smartpack-rodisa.com
+      - VIRTUAL_HOST=smartpack-rodisa.com,www.smartpack-rodisa.com
+      - LETSENCRYPT_HOST=smartpack-rodisa.com,www.smartpack-rodisa.com
       - LETSENCRYPT_EMAIL=arriaga.luis.j@gmail.com
     networks:
       - service-network
